@@ -16,7 +16,7 @@ With this module, users can take advantage of the latest features and improvemen
 
 ```hcl
 module "eks" {
-  source                               = "squareops/eks/aws"
+  source                               = "git@github.com:atmosly/opentofu-aws-eks.git"
   name                                 = "skaf"
   vpc_id                               = "vpc-xyz425342176"
   subnet_ids                           = [module.vpc.private_subnets[0]]
@@ -65,7 +65,7 @@ module "eks" {
 }
 
 module "managed_node_group_production" {
-  source                 = "squareops/eks/aws//modules/managed-nodegroup"
+  source                 = "git@github.com:atmosly/opentofu-aws-eks.git/modules/managed-nodegroup"
   depends_on             = [module.eks]
   name                   = "Infra"
   min_size               = 1
@@ -93,7 +93,7 @@ module "managed_node_group_production" {
 }
 
 module "farget_profle" {
-  source       = "squareops/eks/aws//modules/fargate-profile"
+  source       = "git@github.com:atmosly/opentofu-aws-eks.git/modules/fargate-profile"
   depends_on   = [module.eks]
   profile_name = "app"
   subnet_ids   = ["subnet-abc123"]
@@ -106,10 +106,10 @@ module "farget_profle" {
 }
 
 ```
-Refer [examples](https://github.com/squareops/terraform-aws-eks/tree/main/examples/complete) for more details.
+Refer [examples](https://github.com/atmosly/opentofu-aws-eks/tree/main/examples) for more details.
 
 ## IAM Permissions
-The required IAM permissions to create resources from this module can be found [here](https://github.com/squareops/terraform-aws-eks/blob/main/IAM.md)
+The required IAM permissions to create resources from this module can be found [here](https://github.com/atmosly/opentofu-aws-eks/blob/main/IAM.md)
 
 
 ## EKS-Addons
@@ -252,7 +252,7 @@ In this module, we have implemented the following CIS Compliance checks for EKS:
 
 To report an issue with a project:
 
-  1. Check the repository's [issue tracker](https://github.com/squareops/terraform-aws-eks/issues) on GitHub
+  1. Check the repository's [issue tracker](https://github.com/atmosly/opentofu-aws-eks/issues) on GitHub
   2. Search to see if the issue has already been reported
   3. If you can't find an answer to your question in the documentation or issue tracker, you can ask a question by creating a new issue. Be sure to provide enough context and details so others can understand your problem.
 
@@ -264,7 +264,7 @@ Apache License, Version 2.0, January 2004 (http://www.apache.org/licenses/).
 
 To support a GitHub project by liking it, you can follow these steps:
 
-  1. Visit the repository: Navigate to the [GitHub repository](https://github.com/squareops/terraform-aws-eks).
+  1. Visit the repository: Navigate to the [GitHub repository](https://github.com/atmosly/opentofu-aws-eks).
 
   2. Click the "Star" button: On the repository page, you'll see a "Star" button in the upper right corner. Clicking on it will star the repository, indicating your support for the project.
 

@@ -64,7 +64,7 @@ module "kms" {
 }
 
 module "key_pair_vpn" {
-  source             = "squareops/keypair/aws"
+  source             = "git@github.com:atmosly/opentofu-aws-keypair.git"
   count              = local.vpn_server_enabled ? 1 : 0
   key_name           = format("%s-%s-vpn", local.environment, local.name)
   environment        = local.environment
@@ -72,14 +72,14 @@ module "key_pair_vpn" {
 }
 
 module "key_pair_eks" {
-  source             = "squareops/keypair/aws"
+  source             = "git@github.com:atmosly/opentofu-aws-keypair.git"
   key_name           = format("%s-%s-eks", local.environment, local.name)
   environment        = local.environment
   ssm_parameter_path = format("%s-%s-eks", local.environment, local.name)
 }
 
 module "vpc" {
-  source                                          = "squareops/vpc/aws"
+  source                                          = "git@github.com:atmosly/opentofu-aws-vpc.git"
   environment                                     = local.environment
   name                                            = local.name
   vpc_cidr                                        = local.vpc_cidr
@@ -104,7 +104,7 @@ module "vpc" {
 }
 
 module "eks" {
-  source                               = "squareops/eks/aws"
+  source                               = "git@github.com:atmosly/opentofu-aws-eks.git"
   depends_on                           = [module.vpc]
   name                                 = local.name
   vpc_id                               = module.vpc.vpc_id
@@ -154,7 +154,7 @@ module "eks" {
 }
 
 module "managed_node_group_production" {
-  source                  = "squareops/eks/aws//modules/managed-nodegroup"
+  source                  = "git@github.com:atmosly/opentofu-aws-eks.git/modules/managed-nodegroup"
   depends_on              = [module.vpc, module.eks]
   name                    = "Infra"
   min_size                = 1
@@ -181,7 +181,7 @@ module "managed_node_group_production" {
 }
 
 module "farget_profle" {
-  source       = "squareops/eks/aws//modules/fargate-profile"
+  source       = "git@github.com:atmosly/opentofu-aws-eks.git/modules/fargate-profile"
   depends_on   = [module.vpc, module.eks]
   profile_name = "app"
   subnet_ids   = [module.vpc.private_subnets[0]]
