@@ -1,4 +1,4 @@
-# AWS EKS Terraform module
+# AWS EKS Opentofu module
 ![squareops_avatar]
 
 [squareops_avatar]: https://squareops.com/wp-content/uploads/2022/12/squareops-logo.png
